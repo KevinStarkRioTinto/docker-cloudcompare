@@ -101,7 +101,7 @@ RUN wget -O "fbx.tar.gz" "http://download.autodesk.com/us/fbx_release_older/2016
 # PCL
 RUN apt-get install -y libpcl-dev
 
-# RUN /sbin/ldconfig
+RUN /sbin/ldconfig
 
 # Install CloudCompare
 # use Dflags for enabled plugins
@@ -112,6 +112,7 @@ RUN git clone --recursive https://github.com/cloudcompare/CloudCompare.git && \
     git submodule update && \
     cmake -G "Unix Makefiles" -H/root/CloudCompare -B/root/CloudCompare/build \
         -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/opt/CloudCompare \
         ############################
         # PLUGINS
         ############################
@@ -167,6 +168,10 @@ RUN git clone --recursive https://github.com/cloudcompare/CloudCompare.git && \
         && \
     make && \
     make install
+
+RUN /sbin/ldconfig -v
+ENV LD_LIBRARY_PATH="/opt/CloudCompare/lib/cloudcompare:$LD_LIBRARY_PATH"
+ENV PATH="/opt/CloudCompare/bin:$PATH"
 
 # build info
 RUN echo "Timestamp:" `date --utc` | tee /image-build-info.txt
