@@ -1,5 +1,4 @@
-# https://github.com/tyson-swetnam/cloudcompare-docker/blob/master/18.04/Dockerfile
-# https://github.com/fcwu/docker-ubuntu-vnc-desktop
+# TODO: Remove sources after build (in same layer)
 FROM dorowu/ubuntu-desktop-lxde-vnc as Base
 RUN export DEBIAN_FRONTEND=noninteractive
 
@@ -30,7 +29,12 @@ RUN apt-get update && apt-get install -y qtdeclarative5-dev \
         mesa-common-dev \
         mesa-utils \
         # dlib
-        python3-setuptools
+        python3-setuptools \
+        # CC
+        libpng-dev \
+        libusb-dev \
+        libpcap-dev \
+        python3-vtk7
 
 # GDAL
 # Add the UbuntuGIS PPA https://launchpad.net/~ubuntugis/+archive/ubuntu/ppa
@@ -68,6 +72,16 @@ RUN wget https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/eigen3/3.3.4
     make && \
     make install
 
+# FBX
+# https://github.com/CloudCompare/CloudCompare/blob/master/BUILD.md#optional-setup-for-fbx-sdk-support
+# https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2016-1-2
+RUN wget -O "fbx.tar.gz" "http://download.autodesk.com/us/fbx_release_older/2016.1.2/fbx20161_2_fbxsdk_linux.tar.gz" && \
+    mkdir -p fbx && \
+    tar xf "fbx.tar.gz" --directory="fbx" && \
+    chmod +x fbx/fbx20161_2_fbxsdk_linux && \
+    mkdir -p /usr/fbxsdk && \
+    echo "yes\nno\nn" | fbx/fbx20161_2_fbxsdk_linux /usr/fbxsdk
+
 # PDAL
 # https://pdal.io/development/compilation/unix.html
 # https://github.com/CloudCompare/CloudCompare/blob/master/BUILD.md#optional-setup-for-las-using-pdal
@@ -90,16 +104,6 @@ RUN mkdir PDAL/build && \
     && make && \
     make install
 
-# FBX
-# https://github.com/CloudCompare/CloudCompare/blob/master/BUILD.md#optional-setup-for-fbx-sdk-support
-# https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2016-1-2
-RUN wget -O "fbx.tar.gz" "http://download.autodesk.com/us/fbx_release_older/2016.1.2/fbx20161_2_fbxsdk_linux.tar.gz" && \
-    mkdir -p fbx && \
-    tar xf "fbx.tar.gz" --directory="fbx" && \
-    chmod +x fbx/fbx20161_2_fbxsdk_linux && \
-    mkdir -p /usr/fbxsdk && \
-    echo "yes\nno\nn" | fbx/fbx20161_2_fbxsdk_linux /usr/fbxsdk
-
 # PCL
 RUN apt-get install -y libpcl-dev
 
@@ -118,8 +122,8 @@ RUN /sbin/ldconfig
 
 # HACK: bypass docker cache
 # TODO: put these up top
-RUN apt-get install -y \
-    libpng-dev
+# RUN apt-get install -y \
+#     libpng-dev
 RUN ln -s /usr/lib/x86_64-linux-gnu/libvtkCommonCore-6.2.so /usr/lib/libvtkproj4.so
 
 # Install CloudCompare
@@ -156,8 +160,8 @@ RUN git clone --recursive https://github.com/cloudcompare/CloudCompare.git && \
         # qCSF | A pointclouds filtering algorithm utilize cloth simulation process(Wuming Zhang; Jianbo Qi; Peng Wan,2015)
         -DPLUGIN_STANDARD_QCSF=ON \
         # qCanupo | Train or apply a classifier on a point cloud.
-        -DPLUGIN_STANDARD_QCANUPO=ON \
-        -DDLIB_ROOT=/usr/local/include/dlib \
+        # -DPLUGIN_STANDARD_QCANUPO=ON \
+        # -DDLIB_ROOT=/usr/local/include/dlib \
         # qCompass | A virtual 'compass' for measuring outcrop orientations.
         -DPLUGIN_STANDARD_QCOMPASS=ON \
         # qFacets | BRGM Fracture detection plugin
