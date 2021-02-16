@@ -1,6 +1,5 @@
-# TODO: Remove sources after build (in same layer)
-FROM dorowu/ubuntu-desktop-lxde-vnc as Base
-RUN export DEBIAN_FRONTEND=noninteractive
+FROM ubuntu:bionic
+
 
 # Install base requirements
 RUN apt-get update && apt-get install -y qtdeclarative5-dev \
