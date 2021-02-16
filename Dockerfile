@@ -77,15 +77,19 @@ RUN mkdir -p /tmp/LASzip/build                                              && \
     cd ~ && rm -rf /tmp/LASzip
 
 # EIGEN
-RUN wget https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/eigen3/3.3.4-2/eigen3_3.3.4.orig.tar.bz2 && \
-    tar xvjf eigen* && \
-    cd eigen-eigen* && \
-    mkdir build && \
-    cd build && \
-    cmake -DCMAKE_BUILD_TYPE=Release \
-    .. && \
-    make && \
-    make install
+RUN cd /tmp                                                                 && \
+    wget https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/eigen3/3.3.4-2/eigen3_3.3.4.orig.tar.bz2 && \
+    tar xvjf eigen*                                                         && \
+    cd eigen-eigen*                                                         && \
+    # Configure
+    mkdir build                                                             && \
+    cd build                                                                && \
+    cmake -DCMAKE_BUILD_TYPE=Release ..                                     && \
+    # Build & install
+    make                                                                    && \
+    make install                                                            && \
+    # Cleanup
+    cd ~ && rm -rf /tmp/eigen-eigen*
 
 # FBX
 # https://github.com/CloudCompare/CloudCompare/blob/master/BUILD.md#optional-setup-for-fbx-sdk-support
