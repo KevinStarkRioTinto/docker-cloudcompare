@@ -239,7 +239,7 @@ RUN cd /tmp                                                                 && \
     cd ~ && rm -rf /tmp/CloudCompare
 
 RUN /sbin/ldconfig -v
-ENV LD_LIBRARY_PATH="/opt/CloudCompare/lib/cloudcompare:$LD_LIBRARY_PATH"
+ENV LD_LIBRARY_PATH="/opt/CloudCompare/lib:/opt/CloudCompare/lib/cloudcompare/plugins:$LD_LIBRARY_PATH"
 ENV PATH="/opt/CloudCompare/bin:$PATH"
 
 # build info and cleanup
