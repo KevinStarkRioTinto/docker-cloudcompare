@@ -104,24 +104,25 @@ RUN cd /tmp                                                                 && \
 # PDAL
 # https://pdal.io/development/compilation/unix.html
 # https://github.com/CloudCompare/CloudCompare/blob/master/BUILD.md#optional-setup-for-las-using-pdal
-RUN mkdir -p /tmp/PDAL && \
-    cd /tmp/PDAL && \
-    git init && \
-    git remote add origin https://github.com/PDAL/PDAL.git && \
-    git fetch --tags && \
-    latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) && \
-    cd /root && rm -rf /tmp/PDAL && \
-    git clone --branch $latestTag --depth 1 https://github.com/PDAL/PDAL.git PDAL
-RUN mkdir PDAL/build && \
-    cd PDAL/build && \
-    cmake -G "Unix Makefiles" -H/root/PDAL -B/root/PDAL/build \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DWITH_TESTS=OFF \
-        -DWITH_LASZIP=ON \
-        -DBUILD_PLUGIN_PYTHON=ON \
-        -DBUILD_PLUGIN_PGPOINTCLOUD=ON \
-    && make && \
-    make install
+RUN mkdir -p /tmp/PDAL                                                      && \
+    cd /tmp/PDAL                                                            && \
+    git init                                                                && \
+    git remote add origin https://github.com/PDAL/PDAL.git                  && \
+    git fetch --tags                                                        && \
+    latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)    && \
+    cd ~ && rm -rf /tmp/PDAL                                                && \
+    git clone --branch $latestTag --depth 1 https://github.com/PDAL/PDAL.git /tmp/PDAL
+RUN mkdir /tmp/PDAL/build                                                   && \
+    cd /tmp/PDAL/build                                                      && \
+    cmake -G "Unix Makefiles" -H/tmp/PDAL -B/tmp/PDAL/build                    \
+        -DCMAKE_BUILD_TYPE=Release                                             \
+        -DWITH_TESTS=OFF                                                       \
+        -DWITH_LASZIP=ON                                                       \
+        -DBUILD_PLUGIN_PYTHON=ON                                               \
+        -DBUILD_PLUGIN_PGPOINTCLOUD=ON &&                                      \
+    make                                                                    && \
+    make install                                                            && \
+    cd ~ && rm -rf /tmp/PDAL
 
 # PCL
 RUN apt-get install -y libpcl-dev
