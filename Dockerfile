@@ -142,10 +142,6 @@ RUN apt-get install -y --no-install-recommends libpcl-dev
 
 RUN /sbin/ldconfig
 
-# HACK: bypass docker cache
-# TODO: put these up top
-# RUN apt-get install -y \
-#     libpng-dev
 RUN ln -s /usr/lib/x86_64-linux-gnu/libvtkCommonCore-6.2.so /usr/lib/libvtkproj4.so
 
 # Install CloudCompare
