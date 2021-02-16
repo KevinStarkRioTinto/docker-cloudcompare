@@ -45,11 +45,19 @@ RUN apt-get update                                                          && \
 # GDAL
 # Add the UbuntuGIS PPA https://launchpad.net/~ubuntugis/+archive/ubuntu/ppa
 # (can also use to install QGIS later)
-RUN add-apt-repository --yes ppa:ubuntugis/ppa && \
-    apt-get update && \
-    apt-get install -y libproj-dev libgdal-dev && \
-    apt-get upgrade -y && \
-    apt-get install -y gdal-bin python-gdal python3-gdal libgeotiff-dev libjsoncpp-dev python-numpy
+RUN add-apt-repository --yes ppa:ubuntugis/ppa                              && \
+    apt-get update                                                          && \
+    apt-get install -y --no-install-recommends                                 \
+        libgdal-dev                                                            \
+        libproj-dev                                                         && \
+    apt-get upgrade -y                                                      && \
+    apt-get install -y --no-install-recommends                                 \
+        gdal-bin                                                               \
+        python-gdal                                                            \
+        python3-gdal                                                           \
+        libgeotiff-dev                                                         \
+        libjsoncpp-dev                                                         \
+        python-numpy
 
 # LASZIP
 # https://github.com/LASzip/LASzip.git
