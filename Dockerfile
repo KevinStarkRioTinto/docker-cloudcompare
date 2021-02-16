@@ -91,15 +91,15 @@ RUN cd /tmp                                                                 && \
     # Cleanup
     cd ~ && rm -rf /tmp/eigen-eigen*
 
-# FBX
-# https://github.com/CloudCompare/CloudCompare/blob/master/BUILD.md#optional-setup-for-fbx-sdk-support
-# https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2016-1-2
-RUN wget -O "fbx.tar.gz" "http://download.autodesk.com/us/fbx_release_older/2016.1.2/fbx20161_2_fbxsdk_linux.tar.gz" && \
-    mkdir -p fbx && \
-    tar xf "fbx.tar.gz" --directory="fbx" && \
-    chmod +x fbx/fbx20161_2_fbxsdk_linux && \
-    mkdir -p /usr/fbxsdk && \
-    echo "yes\nno\nn" | fbx/fbx20161_2_fbxsdk_linux /usr/fbxsdk
+# # FBX
+# # https://github.com/CloudCompare/CloudCompare/blob/master/BUILD.md#optional-setup-for-fbx-sdk-support
+# # https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2016-1-2
+# RUN wget -O "fbx.tar.gz" "http://download.autodesk.com/us/fbx_release_older/2016.1.2/fbx20161_2_fbxsdk_linux.tar.gz" && \
+#     mkdir -p fbx && \
+#     tar xf "fbx.tar.gz" --directory="fbx" && \
+#     chmod +x fbx/fbx20161_2_fbxsdk_linux && \
+#     mkdir -p /usr/fbxsdk && \
+#     echo "yes\nn" | fbx/fbx20161_2_fbxsdk_linux /usr/fbxsdk
 
 # PDAL
 # https://pdal.io/development/compilation/unix.html
