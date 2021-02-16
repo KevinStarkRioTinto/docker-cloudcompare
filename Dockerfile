@@ -125,7 +125,7 @@ RUN mkdir /tmp/PDAL/build                                                   && \
     cd ~ && rm -rf /tmp/PDAL
 
 # PCL
-RUN apt-get install -y libpcl-dev
+RUN apt-get install -y --no-install-recommends libpcl-dev
 
 # Dlib (required for qCanupo plugin)
 # https://github.com/davisking/dlib
