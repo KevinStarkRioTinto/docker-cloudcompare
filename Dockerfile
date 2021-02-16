@@ -127,16 +127,18 @@ RUN mkdir /tmp/PDAL/build                                                   && \
 # PCL
 RUN apt-get install -y --no-install-recommends libpcl-dev
 
-# Dlib (required for qCanupo plugin)
-# https://github.com/davisking/dlib
-RUN git clone https://github.com/davisking/dlib && \
-    mkdir -p dlib/build && \
-    cd dlib/build && \
-    cmake -G "Unix Makefiles" -H/root/dlib -B/root/dlib/build && \
-    make && \
-    make install && \
-    cd .. && \
-    python3 setup.py install
+# # Dlib (required for qCanupo plugin)
+# # https://github.com/davisking/dlib
+# RUN mkdir -p /tmp/dlib && \
+#     cd /tmp/dlib && \
+#     git clone https://github.com/davisking/dlib /tmp/dlib && \
+#     mkdir -p /tmp/dlib/build && \
+#     cd /tmp/dlib/build && \
+#     cmake -G "Unix Makefiles" -H/tmp/dlib -B/tmp/dlib/build && \
+#     make && \
+#     make install && \
+#     cd .. && \
+#     python3 setup.py install
 
 RUN /sbin/ldconfig
 
