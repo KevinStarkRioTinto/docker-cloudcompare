@@ -1,5 +1,7 @@
 FROM ubuntu:bionic
 
+ARG TZ=Etc/GMT
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Install base requirements
 RUN apt-get update && apt-get install -y qtdeclarative5-dev \
