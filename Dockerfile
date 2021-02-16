@@ -61,19 +61,20 @@ RUN add-apt-repository --yes ppa:ubuntugis/ppa                              && \
 
 # LASZIP
 # https://github.com/LASzip/LASzip.git
-RUN mkdir -p /tmp/LASzip && \
-    cd /tmp/LASzip && \
-    git init && \
-    git remote add origin https://github.com/LASzip/LASzip.git && \
-    git fetch --tags && \
-    latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) && \
-    cd /root && rm -rf /tmp/LASzip && \
-    git clone --branch $latestTag --depth 1 https://github.com/LASzip/LASzip.git LASzip
-RUN mkdir -p LASzip/build && \
-    cd LASzip/build && \
-    cmake -G "Unix Makefiles" -H/root/LASzip -B/root/LASzip/build \
-    && make && \
-    make install
+RUN mkdir -p /tmp/LASzip                                                    && \
+    cd /tmp/LASzip                                                          && \
+    git init                                                                && \
+    git remote add origin https://github.com/LASzip/LASzip.git              && \
+    git fetch --tags                                                        && \
+    latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)    && \
+    cd ~ && rm -rf /tmp/LASzip                                              && \
+    git clone --branch $latestTag --depth 1 https://github.com/LASzip/LASzip.git /tmp/LASzip
+RUN mkdir -p /tmp/LASzip/build                                              && \
+    cd /tmp/LASzip/build                                                    && \
+    cmake -G "Unix Makefiles" -H/tmp/LASzip -B/tmp/LASzip/build             && \
+    make                                                                    && \
+    make install                                                            && \
+    cd ~ && rm -rf /tmp/LASzip
 
 # EIGEN
 RUN wget https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/eigen3/3.3.4-2/eigen3_3.3.4.orig.tar.bz2 && \
