@@ -243,7 +243,7 @@ ENV LD_LIBRARY_PATH="/opt/CloudCompare/lib:/opt/CloudCompare/lib/cloudcompare/pl
 ENV PATH="/opt/CloudCompare/bin:$PATH"
 
 # build info and cleanup
-RUN apt-get -y autoremove && \
-    apt-get clean && \
-	rm -rf /var/lib/apt/lists/* && \
+RUN apt-get -y autoremove                                                   && \
+    apt-get clean                                                           && \
+	rm -rf /var/lib/apt/lists/*                                             && \
     echo "Timestamp:" `date --utc` | tee /image-build-info.txt
