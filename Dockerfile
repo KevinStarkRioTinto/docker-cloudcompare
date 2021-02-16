@@ -4,38 +4,43 @@ ARG TZ=Etc/GMT
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Install base requirements
-RUN apt-get update && apt-get install -y qtdeclarative5-dev \
-        build-essential g++ git cmake libqt5svg5-dev qttools5-dev unzip wget apt-utils \
-        ffmpeg \
-        libavcodec-dev \
-        libavformat-dev \
-        libavutil-dev \
-        libeigen3-dev \
-        libqt5opengl5-dev \
-        libswscale-dev \
-        libtbb-dev \
-        libxerces-c-dev \
+RUN apt-get update                                                          && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends  \
+        unzip wget git cmake g++                                               \
+        software-properties-common apt-utils build-essential                   \
+        qtdeclarative5-dev libqt5svg5-dev qttools5-dev                         \
+        ffmpeg                                                                 \
+        libavcodec-dev                                                         \
+        libavformat-dev                                                        \
+        libavutil-dev                                                          \
+        libeigen3-dev                                                          \
+        libqt5opengl5-dev                                                      \
+        libswscale-dev                                                         \
+        libtbb-dev                                                             \
+        libxerces-c-dev                                                        \
         # PDAL
-        libssl-dev \
-        python3-dev \
+        libssl-dev                                                             \
+        python3-dev                                                            \
         # CGAL
-        libcgal-dev \
-        libcgal-qt5-dev \
+        libcgal-dev                                                            \
+        libcgal-qt5-dev                                                        \
         # qPhotoscan
-        zip \
-        zlib1g-dev \
+        zip                                                                    \
+        zlib1g-dev                                                             \
         # OpenGL
-        libglu1-mesa-dev \
-        freeglut3-dev \
-        mesa-common-dev \
-        mesa-utils \
+        libglu1-mesa-dev                                                       \
+        freeglut3-dev                                                          \
+        mesa-common-dev                                                        \
+        mesa-utils                                                             \
         # dlib
-        python3-setuptools \
+        # python3-setuptools                                                   \
         # CC
-        libpng-dev \
-        libusb-dev \
-        libpcap-dev \
-        python3-vtk7
+        libpng-dev                                                             \
+        libusb-dev                                                             \
+        libpcap-dev                                                            \
+        python3-vtk7                                                           \
+        # X virtual frame buffer
+        xvfb
 
 # GDAL
 # Add the UbuntuGIS PPA https://launchpad.net/~ubuntugis/+archive/ubuntu/ppa
