@@ -89,7 +89,7 @@ RUN cd /tmp                                                                 && \
     make                                                                    && \
     make install                                                            && \
     # Cleanup
-    cd ~ && rm -rf /tmp/eigen-eigen*
+    cd ~ && rm -rf /tmp/eigen*
 
 # # FBX
 # # https://github.com/CloudCompare/CloudCompare/blob/master/BUILD.md#optional-setup-for-fbx-sdk-support
