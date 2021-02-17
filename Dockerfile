@@ -240,7 +240,8 @@ RUN cd /tmp                                                                 && \
 
 RUN /sbin/ldconfig -v
 ENV LD_LIBRARY_PATH="/opt/CloudCompare/lib:/opt/CloudCompare/lib/cloudcompare/plugins:$LD_LIBRARY_PATH"
-ENV PATH="/opt/CloudCompare/bin:$PATH"
+# ENV PATH="/opt/CloudCompare/bin:$PATH"
+RUN echo "alias CloudCompare='xvfb-run /opt/CloudCompare/bin/CloudCompare'" > ~/.bashrc
 
 # build info and cleanup
 RUN apt-get -y autoremove                                                   && \
