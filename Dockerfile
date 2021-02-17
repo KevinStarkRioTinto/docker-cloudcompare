@@ -248,3 +248,6 @@ RUN apt-get -y autoremove                                                   && \
     apt-get clean                                                           && \
 	rm -rf /var/lib/apt/lists/*                                             && \
     echo "Timestamp:" `date --utc` | tee /image-build-info.txt
+
+# Mount points for data and scripts
+VOLUME [ "/data", "/work" ]
