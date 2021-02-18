@@ -153,5 +153,3 @@ RUN echo "alias CloudCompare='xvfb-run /opt/CloudCompare/bin/CloudCompare'" > ~/
 
 # Mount points for data and scripts
 VOLUME [ "/data", "/work" ]
-
-ENTRYPOINT [ "CloudCompare -SILENT" ]
