@@ -153,4 +153,4 @@ ENV PATH="/opt/CloudCompare/bin:$PATH"
 # Mount points for data and scripts
 VOLUME [ "/data", "/work" ]
 
-CMD [ "xvfb-run", "CloudCompare", "-SILENT" ]
+CMD xvfb-run CloudCompare -SILENT
