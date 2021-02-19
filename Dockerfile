@@ -148,14 +148,9 @@ FROM common
 COPY --from=cc_builder /opt/CloudCompare /opt/CloudCompare
 
 ENV LD_LIBRARY_PATH="/opt/CloudCompare/lib:/opt/CloudCompare/lib/cloudcompare/plugins:$LD_LIBRARY_PATH"
-ENV PATH="/opt/CloudCompare:$PATH"
-
-# Headless mode only - wrap with xfvb
-RUN echo "#!/usr/bin/env bash" > /opt/CloudCompare/CloudCompare \
-    && echo "xvfb-run /opt/CloudCompare/bin/CloudCompare \"$@\"" >> /opt/CloudCompare/CloudCompare \
-    && chmod +x /opt/CloudCompare/CloudCompare
+ENV PATH="/opt/CloudCompare/bin:$PATH"
 
 # Mount points for data and scripts
 VOLUME [ "/data", "/work" ]
 
-CMD [ "CloudCompare", "-SILENT" ]
+CMD [ "xvfb-run", "CloudCompare", "-SILENT" ]
