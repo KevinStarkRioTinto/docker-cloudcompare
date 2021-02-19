@@ -158,4 +158,4 @@ RUN echo "#!/usr/bin/env bash" > /opt/CloudCompare/CloudCompare \
 # Mount points for data and scripts
 VOLUME [ "/data", "/work" ]
 
-ENTRYPOINT [ "CloudCompare", "-SILENT" ]
+CMD [ "CloudCompare", "-SILENT" ]
