@@ -14,7 +14,9 @@ RUN apt-get update \
         gdal-bin \
         libpcl-dev \
         libqt5concurrent5 \
+        python3 \
         python3-gdal \
+        python3-pip \
         python3-vtk7 \
         unzip \
         wget \
@@ -148,7 +150,7 @@ FROM common
 COPY --from=cc_builder /opt/CloudCompare /opt/CloudCompare
 
 COPY requirements.txt /
-RUN python3 -m pip install -r /requirements.txt
+RUN python3 -m pip install -r /requirements.txt && rm /requirements.txt
 
 ENV LD_LIBRARY_PATH="/opt/CloudCompare/lib:/opt/CloudCompare/lib/cloudcompare/plugins:$LD_LIBRARY_PATH"
 ENV PATH="/opt/CloudCompare/bin:$PATH"
