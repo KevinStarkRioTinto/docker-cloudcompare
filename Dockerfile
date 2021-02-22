@@ -147,6 +147,9 @@ FROM common
 
 COPY --from=cc_builder /opt/CloudCompare /opt/CloudCompare
 
+COPY requirements.txt /
+RUN python3 -m pip install -r /requirements.txt
+
 ENV LD_LIBRARY_PATH="/opt/CloudCompare/lib:/opt/CloudCompare/lib/cloudcompare/plugins:$LD_LIBRARY_PATH"
 ENV PATH="/opt/CloudCompare/bin:$PATH"
 
