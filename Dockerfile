@@ -17,6 +17,7 @@ RUN apt-get update \
         python3 \
         python3-gdal \
         python3-pip \
+        python3-setuptools \
         python3-vtk7 \
         unzip \
         wget \
