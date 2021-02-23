@@ -10,6 +10,7 @@ RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         bc \
         ca-certificates \
+        cmake \
         ffmpeg \
         gdal-bin \
         libpcl-dev \
@@ -36,7 +37,6 @@ RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         build-essential \
         software-properties-common \
-        cmake \
         g++ \
         git \
         libssl-dev
