@@ -5,11 +5,6 @@ FROM ubuntu:bionic AS common
 ARG TZ=Etc/GMT
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
-
 # Install base requirements
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -19,6 +14,7 @@ RUN apt-get update \
         gdal-bin \
         libpcl-dev \
         libqt5concurrent5 \
+        locale \
         python3 \
         python3-gdal \
         python3-vtk7 \
@@ -29,6 +25,11 @@ RUN apt-get update \
     # Cleanup
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
 
 ################################################################################
