@@ -14,7 +14,7 @@ RUN apt-get update \
         gdal-bin \
         libpcl-dev \
         libqt5concurrent5 \
-        locale \
+        locales \
         python3 \
         python3-gdal \
         python3-vtk7 \
