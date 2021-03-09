@@ -161,4 +161,7 @@ ENV PATH="/opt/CloudCompare/bin:$PATH"
 # Mount points for data and scripts
 VOLUME [ "/data", "/work" ]
 
+# Enable execution of scripts directly from /work
+ENV PATH="/work:${PATH}"
+
 CMD /bin/sh -c 'xvfb-run CloudCompare -SILENT -CLEAR'
