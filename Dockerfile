@@ -15,7 +15,7 @@ RUN apt-get update \
         libpcl-dev \
         libqt5concurrent5 \
         locales \
-        python3 \
+        python3.9 \
         python3-gdal \
         python3-vtk7 \
         unzip \
@@ -159,7 +159,7 @@ ENV LD_LIBRARY_PATH="/opt/CloudCompare/lib:/opt/CloudCompare/lib/cloudcompare/pl
 ENV PATH="/opt/CloudCompare/bin:$PATH"
 
 # Mount points for data and scripts
-VOLUME [ "/data", "/work" ]
+VOLUME [ "/data", "/work", "/tmp" ]
 
 # Enable execution of scripts directly from /work
 ENV PATH="/work:${PATH}"
