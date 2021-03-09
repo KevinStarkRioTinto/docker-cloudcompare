@@ -26,6 +26,9 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Default python version
+RUN update-alternatives /usr/bin/python3 python3 /usr/bin/python3.8 1
+
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
