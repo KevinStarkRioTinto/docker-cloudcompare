@@ -15,7 +15,7 @@ RUN apt-get update \
         libpcl-dev \
         libqt5concurrent5 \
         locales \
-        python3.9 \
+        python3.8 \
         python3-gdal \
         python3-vtk7 \
         unzip \
