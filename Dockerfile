@@ -26,9 +26,6 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Default python version
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
-
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
@@ -166,5 +163,8 @@ VOLUME [ "/data", "/work", "/tmp" ]
 
 # Enable execution of scripts directly from /work
 ENV PATH="/work:${PATH}"
+
+# Default python version
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
 
 CMD /bin/sh -c 'xvfb-run CloudCompare -SILENT -CLEAR'
