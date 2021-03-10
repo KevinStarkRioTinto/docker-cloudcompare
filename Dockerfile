@@ -159,9 +159,12 @@ ENV LD_LIBRARY_PATH="/opt/CloudCompare/lib:/opt/CloudCompare/lib/cloudcompare/pl
 ENV PATH="/opt/CloudCompare/bin:$PATH"
 
 # Mount points for data and scripts
-VOLUME [ "/data", "/work", "/tmp" ]
+VOLUME [ "/data", "/work" ]
 
 # Enable execution of scripts directly from /work
 ENV PATH="/work:${PATH}"
+
+# Default to latest python runtime
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
 
 CMD /bin/sh -c 'xvfb-run CloudCompare -SILENT -CLEAR'
