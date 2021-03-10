@@ -164,7 +164,4 @@ VOLUME [ "/data", "/work", "/tmp" ]
 # Enable execution of scripts directly from /work
 ENV PATH="/work:${PATH}"
 
-# Default python version
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
-
 CMD /bin/sh -c 'xvfb-run CloudCompare -SILENT -CLEAR'
