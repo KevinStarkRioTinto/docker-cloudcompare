@@ -77,10 +77,10 @@ RUN apt-get install -y --no-install-recommends \
 
 #===============================================================================
 # CloudCompare
-WORKDIR /tmp/CloudCompare
-# Clone
-RUN git clone --recursive https://github.com/cloudcompare/CloudCompare.git .
-RUN git submodule init && git submodule update
+# Download and extract
+RUN curl https://github.com/CloudCompare/CloudCompare/archive/refs/tags/v2.11.3.zip \
+  | tar -xjC /tmp/
+WORKDIR /tmp/CloudCompare-2.11.3
 
 # Configure CMake
 WORKDIR build
