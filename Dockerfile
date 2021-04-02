@@ -79,9 +79,9 @@ RUN apt-get install -y --no-install-recommends \
 # CloudCompare
 # Download and extract
 WORKDIR /tmp
-ADD https://github.com/CloudCompare/CloudCompare/archive/refs/tags/v2.11.3.zip
-RUN unzip v2.11.3.zip -d /tmp/
-WORKDIR /tmp/v2.11.3
+RUN wget https://github.com/CloudCompare/CloudCompare/archive/refs/tags/v2.11.3.zip
+RUN unzip v2.11.3.zip
+WORKDIR /tmp/CloudCompare-2.11.3
 
 # Configure CMake
 WORKDIR build
