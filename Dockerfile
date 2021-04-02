@@ -10,7 +10,6 @@ RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         bc \
         ca-certificates \
-        curl \
         ffmpeg \
         gdal-bin \
         libpcl-dev \
@@ -79,9 +78,10 @@ RUN apt-get install -y --no-install-recommends \
 #===============================================================================
 # CloudCompare
 # Download and extract
-RUN curl https://github.com/CloudCompare/CloudCompare/archive/refs/tags/v2.11.3.zip \
-  | tar -xjC /tmp/
-WORKDIR /tmp/CloudCompare-2.11.3
+WORKDIR /tmp
+ADD https://github.com/CloudCompare/CloudCompare/archive/refs/tags/v2.11.3.zip
+RUN unzip v2.11.3.zip -d /tmp/
+WORKDIR /tmp/v2.11.3
 
 # Configure CMake
 WORKDIR build
