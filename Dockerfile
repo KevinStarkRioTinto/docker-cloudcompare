@@ -143,7 +143,7 @@ RUN cmake -G "Unix Makefiles" -H.. -B. \
         # Others
         -DCOMPILE_CC_CORE_LIB_WITH_TBB=ON \
         -DCOMPILE_CC_CORE_LIB_WITH_CGAL=ON \
-    || cat build/CMakeFiles/CMakeError.log
+    || cat CMakeFiles/CMakeError.log
 
 # Build & Install
 RUN make
