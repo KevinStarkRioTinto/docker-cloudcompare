@@ -141,7 +141,8 @@ RUN cmake -G "Unix Makefiles" -H.. -B. \
         # GDAL | raster files support | https://github.com/cloudcompare/cloudcompare/blob/master/BUILD.md#optional-setup-for-gdal-support
         -DOPTION_USE_GDAL=ON \
         # Others
-        -DCOMPILE_CC_CORE_LIB_WITH_TBB=ON \
+        # https://github.com/CloudCompare/CloudCompare/commit/f5a0c9fd788da26450f3fa488b2cf0e4a08d255f
+        -DCCCORELIB_USE_TBB=ON \
         -DCOMPILE_CC_CORE_LIB_WITH_CGAL=ON \
     || gawk 'BEGINFILE{print FILENAME};{print "\t" $0}' *.log
 
